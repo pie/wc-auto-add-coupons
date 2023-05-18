@@ -41,6 +41,9 @@ add_action( 'woocommerce_init', __NAMESPACE__ . '\add_custom_coupon_to_session' 
  * @return void
  */
 function apply_discount_to_cart() {
+    if ( is_admin() ) {
+        return;
+    }
     // Set coupon code
     $coupon_code = WC()->session->get( 'coupon_code' );
     if ( ! empty( $coupon_code ) && ! WC()->cart->has_discount( $coupon_code ) ){
